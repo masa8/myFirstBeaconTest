@@ -31,52 +31,53 @@ public class CommonListAdapter extends BaseAdapter {
 	protected Context context;
 	
 	protected int titleTextStyle = android.R.attr.textAppearanceMedium;
-	/** TitleのTextViewに設定するStyle (default:android.R.attr.textAppearanceMedium) */
 	public int getTitleTextStyle(){return this.titleTextStyle;}
-	/** TitleのTextViewに設定するStyle (default:android.R.attr.textAppearanceMedium) */
 	public void setTitleTextStyle(int value){this.titleTextStyle = value;}
 	
 	protected int iconWidth = android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-	/** iconに設定するWidth (default : android.view.ViewGroup.LayoutParams.WRAP_CONTENT) */
 	public int getIconWidth(){return this.iconWidth;}
-	/** iconに設定するWidth (default : android.view.ViewGroup.LayoutParams.WRAP_CONTENT) */
 	public void setIconWidth(int value){this.iconWidth = value;}
 	
-	/** コンストラクタ */
 	public CommonListAdapter(Context context){
 		this.context = context;
 		this.itemList = new ArrayList<ICommonListAdapterItem>();
 	}
 	
-	/** 要素の追加 */
 	public void addItem(String title){
-		this.addItem(null, title, null, null);
-	}
-	/** 要素の追加 */
-	public void addItem(Drawable icon, String title){
-		this.addItem(icon, title, null, null);
-	}
-	/** 要素の追加 */
-	public void addItem(Drawable icon, String title, String summary){
-		this.addItem(icon, title, summary, null);
+		this.addItem(null, title, null, null,0,0);
 	}
 	
-	/** 要素の追加 */
-	public void addItem(Drawable icon, String title, String summary, Object token){
+	public void addItem(Drawable icon, String title){
+		this.addItem(icon, title, null, null,0,0);
+	}
+
+
+	public void addItem(Drawable icon, String title, String summary){
+		this.addItem(icon, title, summary, null,0,0);
+	}
+	
+	public void addItem(Drawable icon, String title, String summary,
+			Integer major, Integer minor) {
+		
+		addItem(icon,title,summary,null,major,minor);
+		
+	}
+
+	public void addItem(Drawable icon, String title, String summary, Object token,Integer major, Integer minor){
 		CommonListAdapterItem item = new CommonListAdapterItem();
 		item.setIcon(icon);
 		item.setTitle(title);
 		item.setSummary(summary);
 		item.setToken(token);
-		
+		item.setColor(minor);
 		this.addItem(item);
 	}
-	/** 要素の追加 */
+
+	
 	public void addItem(ICommonListAdapterItem item){
 		this.itemList.add(item);
 	}
 	
-	/** 要素のクリア */
 	public void clearItem(){
 		this.itemList.clear();
 	}
@@ -186,13 +187,14 @@ public class CommonListAdapter extends BaseAdapter {
 				summaryTextView.setVisibility(View.VISIBLE);
 				summaryTextView.setText(item.getSummary());
 			}
+			
+			returnValue.setBackgroundColor(item.getColor());
 		}
 						
 		return returnValue;
 	}
 	
 	/***
-	 * dp(dip)からpixelへの変換を行います
 	 * @param context
 	 * @param value
 	 * @return

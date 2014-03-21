@@ -22,4 +22,6 @@ public interface ICommonListAdapterItem {
 	
 	Object getToken();
 	void setToken(Object value);
+	
+	int getColor();
 }

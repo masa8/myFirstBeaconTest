@@ -32,8 +32,8 @@ public class MainActivity extends Activity {
 		tran.commit();
 	}
 	
-	/* (非 Javadoc)
-	 * @see android.app.Activity#onStart()
+	/* 
+	 *  @see android.app.Activity#onStart()
 	 */
 	@Override
 	protected void onStart() {
@@ -46,8 +46,8 @@ public class MainActivity extends Activity {
 		this.showBeaconListFragment();
 	}
 
-	/* (非 Javadoc)
-	 * @see android.app.Activity#onStop()
+	/* 
+	 *  @see android.app.Activity#onStop()
 	 */
 	@Override
 	protected void onStop() {

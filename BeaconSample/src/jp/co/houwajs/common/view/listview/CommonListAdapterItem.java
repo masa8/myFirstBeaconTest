@@ -14,6 +14,8 @@ public class CommonListAdapterItem implements ICommonListAdapterItem {
 	//private static final String TAG = CommonListAdapterItem.class.getName();
 	
 	private Drawable icon;
+	private int mColorId;
+	
 	@Override
 	public Drawable getIcon(){return this.icon;}	
 	@Override
@@ -32,8 +34,19 @@ public class CommonListAdapterItem implements ICommonListAdapterItem {
 	public void setSummary(String value) {this.summary = value;}
 	
 	private Object token;
+	
 	@Override
 	public Object getToken() {return this.token;}
+	
 	@Override
 	public void setToken(Object value) { this.token = value;}
+	
+	@Override
+	public int getColor() {
+		return mColorId;
+	}
+	
+	public void setColor(Integer minor) {
+		mColorId = minor * 10;
+	}
 }

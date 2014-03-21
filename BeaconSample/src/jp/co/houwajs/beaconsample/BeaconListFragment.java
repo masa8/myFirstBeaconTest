@@ -75,7 +75,11 @@ public class BeaconListFragment extends Fragment {
 					
 					List<Beacon> beaconList = mainActivity.getBeaconManager().getScannedBeaconList();
 					for(Beacon beacon : beaconList){					
-						listAdapter.addItem(null, beacon.toString(), "rssi:" + beacon.getRssi() + String.format(" distance:%.2fm", beacon.getDistance()));
+						listAdapter.addItem(null, 
+											beacon.toString(), 
+											"rssi:" + beacon.getRssi() + String.format(" distance:%.2fm", beacon.getDistance()),
+											beacon.getMajor(),
+											beacon.getMinor());
 					}
 					
 					(new Handler(Looper.getMainLooper())).post(new Runnable(){
